@@ -14,6 +14,14 @@ type(ip_addr)
 resp = input(""" \nPlease enter the type of scan you want to run
                  1)SYN ACK Scan
                  2)UDP Scan
-                 3)Comprehensive Scan   """)
+                 3)Comprehensive Scan\n""")
 
 print("You have selected option: ", resp)
+
+if resp == '1':
+    print("nmap version: ", scanner.nmap_version())
+    scanner.scan(ip_addr, '1-1024', '-v -sS')
+    print(scanner.scaninfo())
+    print("IP status: ", scanner[ip_addr].state())
+    print(scanner[ip_addr].all_protocols())
+    print("Open ports: ", scanner[ip_addr]['tcp'].keys())
